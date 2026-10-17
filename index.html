@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GlowFinance - Sua Assistente Financeira</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- FontAwesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- CSS Customizado -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Configuração do Tailwind -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        base: {
+                            50: '#FFF5F7',
+                            100: '#FDF0F3',
+                            200: '#FCE4EC',
+                        },
+                        card: {
+                            light: '#FFFFFF',
+                            soft: '#F8BBD0',
+                            medium: '#F48FB1',
+                            accent: '#EC407A',
+                        },
+                        brand: {
+                            primary: '#D81B60',
+                            glow: '#FF4081',
+                            gold: '#E5A9A9',
+                            goldDark: '#C58383',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="text-gray-700 antialiased min-h-screen pb-12">
+
+    <!-- Header / Navbar -->
+    <header class="bg-white/80 backdrop-blur-md sticky top-0 z-40 border-b border-rose-100 px-4 lg:px-8 py-4">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-brand-primary to-brand-glow flex items-center justify-center text-white shadow-md">
+                    <i class="fa-solid fa-sparkles text-lg"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl font-bold bg-gradient-to-r from-brand-primary to-brand-glow bg-clip-text text-transparent">GlowFinance</h1>
+                    <p class="text-xs text-rose-400 font-medium">Sua Assistente Financeira</p>
+                </div>
+            </div>
+
+            <!-- Banner Motivacional Header -->
+            <div id="motivation-banner" class="hidden md:flex items-center gap-2 bg-base-100 px-4 py-2 rounded-full border border-rose-200/60 max-w-md text-xs text-rose-700 font-medium shadow-sm">
+                <i class="fa-solid fa-heart text-brand-primary animate-pulse"></i>
+                <span id="motivation-text">"Cuide do seu futuro com o mesmo carinho que cuida de você!"</span>
+            </div>
+
+            <!-- Perfil -->
+            <div class="flex items-center gap-3">
+                <div class="text-right hidden sm:block">
+                    <p class="text-sm font-semibold text-gray-800">Oii, amiga! 💋</p>
+                    <p class="text-xs text-rose-400">Rafa Xavier</p>
+                </div>
+                <div class="w-10 h-10 rounded-full ring-2 ring-brand-primary/30 p-0.5 bg-rose-50 overflow-hidden flex items-center justify-center text-brand-primary font-bold">
+                    <i class="fa-solid fa-user-ninja text-lg"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="max-w-7xl mx-auto px-4 lg:px-8 pt-6 space-y-6">
+
+        <!-- Banner Motivacional Mobile -->
+        <div class="md:hidden bg-gradient-to-r from-rose-100 to-pink-50 p-4 rounded-2xl border border-rose-200/60 text-center text-xs text-rose-800 font-medium flex items-center justify-center gap-2 shadow-sm">
+            <i class="fa-solid fa-gem text-brand-primary"></i>
+            <span id="motivation-text-mobile">"Poderosa é quem domina suas próprias finanças!"</span>
+        </div>
+
+        <!-- Resumo Financeiro (60-30-10 Aesthetic) -->
+        <section class="grid grid-cols-1 md:grid-cols-3 gap-5">
+            <!-- Card Entradas -->
+            <div class="glass-card bg-white rounded-3xl p-6 custom-shadow border-l-4 border-emerald-400 relative overflow-hidden group">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <p class="text-xs font-semibold uppercase tracking-wider text-gray-400">Total de Entradas</p>
+                        <h3 id="total-incomes" class="text-2xl lg:text-3xl font-extrabold text-gray-800 mt-2">R$ 0,00</h3>
+                    </div>
+                    <div class="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-500 flex items-center justify-center text-xl group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-arrow-trend-up"></i>
+                    </div>
+                </div>
+                <p class="text-xs text-emerald-600 font-medium mt-3 flex items-center gap-1">
+                    <i class="fa-solid fa-circle-check"></i> Receitas cadastradas
+                </p>
+            </div>
+
+            <!-- Card Saídas -->
+            <div class="glass-card bg-white rounded-3xl p-6 custom-shadow border-l-4 border-rose-400 relative overflow-hidden group">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <p class="text-xs font-semibold uppercase tracking-wider text-gray-400">Total de Saídas</p>
+                        <h3 id="total-expenses" class="text-2xl lg:text-3xl font-extrabold text-rose-600 mt-2">R$ 0,00</h3>
+                    </div>
+                    <div class="w-12 h-12 rounded-2xl bg-rose-50 text-rose-500 flex items-center justify-center text-xl group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-arrow-trend-down"></i>
+                    </div>
+                </div>
+                <p class="text-xs text-rose-500 font-medium mt-3 flex items-center gap-1">
+                    <i class="fa-solid fa-basket-shopping"></i> Despesas acumuladas
+                </p>
+            </div>
+
+            <!-- Card Saldo Atual -->
+            <div class="bg-gradient-to-br from-brand-primary via-brand-glow to-rose-500 rounded-3xl p-6 text-white custom-shadow relative overflow-hidden group">
+                <div class="absolute -right-4 -bottom-4 w-24 h-24 bg-white/10 rounded-full blur-xl group-hover:scale-150 transition-transform"></div>
+                <div class="flex justify-between items-start relative z-10">
+                    <div>
+                        <p class="text-xs font-semibold uppercase tracking-wider text-rose-100">Saldo Atual</p>
+                        <h3 id="total-balance" class="text-2xl lg:text-3xl font-extrabold text-white mt-2">R$ 0,00</h3>
+                    </div>
+                    <div class="w-12 h-12 rounded-2xl bg-white/20 backdrop-blur-md text-white flex items-center justify-center text-xl group-hover:rotate-12 transition-transform">
+                        <i class="fa-solid fa-wallet"></i>
+                    </div>
+                </div>
+                <p id="balance-status" class="text-xs text-rose-100 font-medium mt-3 flex items-center gap-1 relative z-10">
+                    <i class="fa-solid fa-sparkles"></i> Balanço sob controle
+                </p>
+            </div>
+        </section>
+
+        <!-- Main Workspace -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+
+            <!-- Formulário (5 cols) -->
+            <section class="lg:col-span-5 space-y-6">
+                <div class="glass-card bg-white rounded-3xl p-6 custom-shadow border border-rose-100">
+                    <h2 class="text-lg font-bold text-gray-800 mb-4 flex items-center gap-2">
+                        <span class="w-8 h-8 rounded-xl bg-rose-100 text-brand-primary flex items-center justify-center text-sm">
+                            <i class="fa-solid fa-plus"></i>
+                        </span>
+                        Nova Transação
+                    </h2>
+
+                    <!-- Toggle Tipo -->
+                    <div class="grid grid-cols-2 gap-2 p-1.5 bg-rose-50/80 rounded-2xl mb-5">
+                        <button id="type-expense-btn" onclick="setTransactionType('expense')" class="py-2.5 px-4 rounded-xl text-sm font-semibold transition-all duration-200 bg-white text-brand-primary shadow-sm flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-circle-minus text-rose-500"></i> Saída
+                        </button>
+                        <button id="type-income-btn" onclick="setTransactionType('income')" class="py-2.5 px-4 rounded-xl text-sm font-semibold transition-all duration-200 text-gray-500 hover:text-gray-800 flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-circle-plus text-emerald-500"></i> Entrada
+                        </button>
+                    </div>
+
+                    <form id="transaction-form" onsubmit="handleFormSubmit(event)" class="space-y-4">
+                        <!-- Valor -->
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-600 mb-1">Valor (R$)</label>
+                            <div class="relative">
+                                <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 font-medium text-sm">R$</span>
+                                <input type="number" id="input-amount" step="0.01" min="0.01" placeholder="0,00" required class="w-full pl-10 pr-4 py-3 rounded-2xl border border-rose-100 focus:border-brand-primary focus:ring-2 focus:ring-rose-200 outline-none text-gray-800 text-sm bg-rose-50/30 transition-all">
+                            </div>
+                        </div>
+
+                        <!-- Descrição -->
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-600 mb-1">Descrição</label>
+                            <input type="text" id="input-description" placeholder="Ex: Salário, Vestido novo, Maquiagem..." required class="w-full px-4 py-3 rounded-2xl border border-rose-100 focus:border-brand-primary focus:ring-2 focus:ring-rose-200 outline-none text-gray-800 text-sm bg-rose-50/30 transition-all">
+                        </div>
+
+                        <!-- Data -->
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-600 mb-1">Data</label>
+                            <input type="date" id="input-date" required class="w-full px-4 py-3 rounded-2xl border border-rose-100 focus:border-brand-primary focus:ring-2 focus:ring-rose-200 outline-none text-gray-800 text-sm bg-rose-50/30 transition-all">
+                        </div>
+
+                        <!-- Categoria -->
+                        <div id="category-container">
+                            <label class="block text-xs font-semibold text-gray-600 mb-1">Categoria</label>
+                            <select id="input-category" class="w-full px-4 py-3 rounded-2xl border border-rose-100 focus:border-brand-primary focus:ring-2 focus:ring-rose-200 outline-none text-gray-800 text-sm bg-rose-50/30 transition-all">
+                                <option value="Comida/Alimentação">🍔 Comida / Alimentação</option>
+                                <option value="Roupas/Moda">👗 Roupas / Moda</option>
+                                <option value="Maquiagem/Beleza">💄 Maquiagem / Beleza</option>
+                                <option value="Moradia/Contas">🏠 Moradia / Contas</option>
+                                <option value="Transporte">🚗 Transporte</option>
+                                <option value="Lazer">🎉 Lazer</option>
+                                <option value="Saúde/Autocuidado">💖 Saúde / Autocuidado</option>
+                                <option value="Outros">✨ Outros</option>
+                            </select>
+                        </div>
+
+                        <!-- Botão Cadastrar -->
+                        <button type="submit" class="w-full py-3.5 px-6 rounded-2xl bg-gradient-to-r from-brand-primary to-brand-glow text-white font-bold text-sm glow-button flex items-center justify-center gap-2 mt-2">
+                            <i class="fa-solid fa-sparkles"></i> Adicionar Transação
+                        </button>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Gráfico e Lista (7 cols) -->
+            <section class="lg:col-span-7 space-y-6">
+
+                <!-- Gráfico de Categorias -->
+                <div class="glass-card bg-white rounded-3xl p-6 custom-shadow border border-rose-100">
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-lg font-bold text-gray-800 flex items-center gap-2">
+                            <span class="w-8 h-8 rounded-xl bg-rose-100 text-brand-primary flex items-center justify-center text-sm">
+                                <i class="fa-solid fa-chart-pie"></i>
+                            </span>
+                            Gastos por Categoria
+                        </h2>
+                    </div>
+                    
+                    <div class="relative flex justify-center items-center h-64">
+                        <canvas id="categoryChart"></canvas>
+                        <div id="no-chart-data" class="hidden absolute inset-0 flex flex-col items-center justify-center text-gray-400 text-center">
+                            <i class="fa-solid fa-chart-line text-4xl text-rose-200 mb-2"></i>
+                            <p class="text-sm font-medium">Nenhum gasto registrado ainda!</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Histórico e Filtro -->
+                <div class="glass-card bg-white rounded-3xl p-6 custom-shadow border border-rose-100 space-y-4">
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+                        <h2 class="text-lg font-bold text-gray-800 flex items-center gap-2">
+                            <span class="w-8 h-8 rounded-xl bg-rose-100 text-brand-primary flex items-center justify-center text-sm">
+                                <i class="fa-solid fa-list-check"></i>
+                            </span>
+                            Histórico
+                        </h2>
+
+                        <!-- Busca e Filtros -->
+                        <div class="flex items-center gap-2 w-full sm:w-auto">
+                            <div class="relative flex-1 sm:w-48">
+                                <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-xs text-gray-400"></i>
+                                <input type="text" id="search-input" onkeyup="renderTransactions()" placeholder="Buscar..." class="w-full pl-8 pr-3 py-1.5 rounded-xl border border-rose-100 text-xs focus:ring-1 focus:ring-brand-primary outline-none bg-rose-50/20">
+                            </div>
+                            <select id="filter-type" onchange="renderTransactions()" class="py-1.5 px-3 rounded-xl border border-rose-100 text-xs bg-rose-50/20 text-gray-700 outline-none">
+                                <option value="all">Todos</option>
+                                <option value="expense">Saídas</option>
+                                <option value="income">Entradas</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Lista de Transações -->
+                    <div class="max-h-80 overflow-y-auto pr-1">
+                        <ul id="transaction-list" class="space-y-3"></ul>
+                    </div>
+                </div>
+
+            </section>
+        </div>
+
+    </main>
+
+    <!-- Toast de Notificação -->
+    <div id="toast" class="fixed bottom-5 right-5 transform translate-y-20 opacity-0 transition-all duration-300 bg-gray-900 text-white px-5 py-3 rounded-2xl shadow-2xl flex items-center gap-3 z-50">
+        <i class="fa-solid fa-circle-check text-emerald-400 text-lg"></i>
+        <span id="toast-message" class="text-sm font-medium">Operação realizada com sucesso!</span>
+    </div>
+
+    <!-- JavaScript da Aplicação -->
+    <script src="script.js"></script>
+</body>
+</html>

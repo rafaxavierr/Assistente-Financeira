@@ -1,0 +1,38 @@
+body {
+background-color: #FFF5F7;
+font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.glass-card {
+background: rgba(255, 255, 255, 0.9);
+backdrop-filter: blur(10px);
+border: 1px solid rgba(248, 187, 208, 0.3);
+}
+
+.custom-shadow {
+box-shadow: 0 10px 25px -5px rgba(216, 27, 96, 0.08), 0 8px 10px -6px rgba(216, 27, 96, 0.04);
+}
+
+.glow-button {
+transition: all 0.3s ease;
+box-shadow: 0 4px 15px rgba(216, 27, 96, 0.3);
+}
+
+.glow-button:hover {
+transform: translateY(-2px);
+box-shadow: 0 6px 20px rgba(216, 27, 96, 0.45);
+}
+
+/* Scrollbar Customizada */
+::-webkit-scrollbar {
+width: 6px;
+}
+
+::-webkit-scrollbar-track {
+background: #FFF5F7;
+}
+
+::-webkit-scrollbar-thumb {
+background: #F48FB1;
+border-radius: 10px;
+}
